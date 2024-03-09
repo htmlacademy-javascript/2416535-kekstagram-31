@@ -1,8 +1,4 @@
-import {Posting} from './post-generating.js';
+import {fragment} from './photo-template.js';
+const pictureArea = document.querySelector('.pictures');
 
-const objects = [];
-
-for(let i = 0; i < 25; i++){
-  objects.push(new Posting());
-}
-console.log(objects);
+pictureArea.appendChild(fragment);

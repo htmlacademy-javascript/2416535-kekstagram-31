@@ -13,3 +13,11 @@ export function Posting() {
     name: nameArray[randomRange(0, 4)],
   };
 }
+
+const objects = [];
+
+for(let i = 0; i < 25; i++){
+  objects.push(new Posting());
+}
+
+export {objects};
