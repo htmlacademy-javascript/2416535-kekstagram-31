@@ -1,3 +1,4 @@
+const pageURL = 'http://127.0.0.1:5500/';
 
 function randomRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -19,4 +20,12 @@ function IDGenerator(start, length) {
   return currentValue;
 }
 
-export {randomRange, IDGenerator};
+function findObject (object, evtSrc, url = pageURL) {
+  let i = 0;
+  while((url + object[i].url) !== evtSrc){
+    i++;
+  }
+  return object[i];
+}
+
+export {randomRange, IDGenerator, findObject, pageURL};
