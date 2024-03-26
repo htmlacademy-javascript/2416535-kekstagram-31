@@ -57,22 +57,21 @@ function checkHashTag(value){
 pristine.addValidator(textHashTags, checkHashTag, 'sms about wrong');
 
 //второй объект валидации
-const pristineComment = new Pristine(uploadForm, {
-  classTo: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field-wrapper--error',
-  errorTextParent: 'img-upload__field-wrapper',
-});
+// const pristineComment = new Pristine(uploadForm, {
+//   classTo: 'img-upload__field-wrapper',
+//   errorClass: 'img-upload__field-wrapper--error',
+//   errorTextParent: 'img-upload__field-wrapper',
+// });
 
 function checkDesctiption(value){
   return value.length <= 140;
 }
 
-pristineComment.addValidator(textDescription, checkDesctiption, 'Ашибка! слишком много читать');
+pristine.addValidator(textDescription, checkDesctiption, 'Ашибка! слишком много читать');
 
 uploadForm.addEventListener('submit', (evt)=>{
   evt.preventDefault();
   pristine.validate();
-  pristineComment.validate();
 });
 
 //фокусировка на поле ввода
