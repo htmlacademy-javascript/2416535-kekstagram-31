@@ -3,7 +3,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const textHashTags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
 
-imgUpload.addEventListener('click', ()=>{
+imgUpload.addEventListener('click', () => {
   document.addEventListener('keydown', closeFormByKey);
   document.querySelector('.img-upload__overlay').classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -11,7 +11,7 @@ imgUpload.addEventListener('click', ()=>{
 
 function closeFormByKey(evt) {
   if (evt.key === 'Escape') {
-    if(textHashTags === document.activeElement || textDescription === document.activeElement){
+    if (textHashTags === document.activeElement || textDescription === document.activeElement) {
       return;
     }
     document.body.classList.remove('modal-open');
@@ -28,7 +28,6 @@ function closeFormLoadByClick() {
 let hashTags = [];
 const hashTag = /^#[a-zа-яё0-9]{1,19}$/i;
 
-
 //первый объект валидации
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -36,17 +35,17 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
 });
 
-function checkHashTag(value){
+function checkHashTag(value) {
   hashTags = value.split(' ');
-  if(value === ''){
+  if (value === '') {
     return true;
   }
-  for (let i = 0; i < hashTags.length; i++){
-    if(!(hashTag.test(hashTags[i])) || hashTags.length > 5){
+  for (let i = 0; i < hashTags.length; i++) {
+    if (!(hashTag.test(hashTags[i])) || hashTags.length > 5) {
       return false;
     }
-    for (let j = 0; j < i; j++){
-      if(hashTags[j] === hashTags[i]){
+    for (let j = 0; j < i; j++) {
+      if (hashTags[j] === hashTags[i]) {
         return false;
       }
     }
@@ -54,27 +53,17 @@ function checkHashTag(value){
   return true;
 }
 
-pristine.addValidator(textHashTags, checkHashTag, 'sms about wrong');
+pristine.addValidator(textHashTags, checkHashTag, 'хэш-тэги введены некорректно');
 
-//второй объект валидации
-// const pristineComment = new Pristine(uploadForm, {
-//   classTo: 'img-upload__field-wrapper',
-//   errorClass: 'img-upload__field-wrapper--error',
-//   errorTextParent: 'img-upload__field-wrapper',
-// });
-
-function checkDesctiption(value){
+function checkDesctiption(value) {
   return value.length <= 140;
 }
 
-pristine.addValidator(textDescription, checkDesctiption, 'Ашибка! слишком много читать');
+pristine.addValidator(textDescription, checkDesctiption, 'описание превышает максимально допустимую длину');
 
-uploadForm.addEventListener('submit', (evt)=>{
+uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
 
-//фокусировка на поле ввода
-
-
-export {closeFormLoadByClick};
+export { closeFormLoadByClick, pristine, uploadForm };
