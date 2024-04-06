@@ -1,14 +1,19 @@
-const btnSmaller = document.querySelector('.scale__control--smaller');
-const btnBigger = document.querySelector('.scale__control--bigger');
-const scaleImg = document.querySelector('.scale__control--value');
+//контроль размера
+const [btnSmaller, scaleImg, btnBigger] = document.querySelector('.img-upload__scale').children;
+//слайдер эффекты
+const [original, chrome, sepia, marvin, phobos, znoy] = document.querySelector('.effects__list').children;
 const imgPreview = document.querySelector('.img-upload__preview img');
 
+const slider = document.querySelector('.effect-level__slider');
+const sliderValue = document.querySelector('.effect-level__value');
+
 let scale = 100;
+const charProcent = '%';
 
 function reduceImg() {
   if(scale > 25) {
     scale -= 25;
-    scaleImg.value = scale + '%';
+    scaleImg.value = scale + charProcent;
     imgPreview.style.transform = `scale(${scale / 100})`;
   }
 }
@@ -16,23 +21,13 @@ function reduceImg() {
 function increaseImg() {
   if(scale < 100){
     scale += 25;
-    scaleImg.value = scale + '%';
+    scaleImg.value = scale + charProcent;
     imgPreview.style.transform = `scale(${scale / 100})`;
   }
 }
 
 btnSmaller.addEventListener('click', reduceImg);
 btnBigger.addEventListener('click', increaseImg);
-
-//слайдер эффекты
-const original = document.querySelector('.effects__preview--none');
-const chrome = document.querySelector('.effects__preview--chrome');
-const sepia = document.querySelector('.effects__preview--sepia');
-const marvin = document.querySelector('.effects__preview--marvin');
-const phobos = document.querySelector('.effects__preview--phobos');
-const znoy = document.querySelector('.effects__preview--heat');
-const slider = document.querySelector('.effect-level__slider');
-const sliderValue = document.querySelector('.effect-level__value');
 
 let filter;
 let rate;
