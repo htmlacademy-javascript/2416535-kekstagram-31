@@ -1,7 +1,7 @@
 import {randomRange, IDGenerator} from './util.js';
 import {messageArray, nameArray} from './data.js';
 
-export function Posting() {
+function Posting() {
   this.id = IDGenerator(1,25);
   this.url = `photos/${this.id}.jpg`;
   this.likes = randomRange(15, 200);
