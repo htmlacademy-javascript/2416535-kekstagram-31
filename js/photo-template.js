@@ -3,11 +3,13 @@ import { fetchRequest } from './server-control.js';
 const fragment = document.createDocumentFragment();
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const errorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
-const pictureArea = document.querySelector('.pictures');
+const pictures = document.querySelector('.pictures');
 
 fetchRequest
   .then((photos) => {
-    photos.forEach((photo)=>{
+    // photos.sort((a, b) => a.comments.length - b.comments.length);
+
+    photos.forEach((photo) => {
       const pictureElement = pictureTemplate.cloneNode(true);
       pictureElement.querySelector('.picture__img').src = photo.url;
       pictureElement.querySelector('.picture__img').alt = photo.description;
@@ -17,14 +19,16 @@ fetchRequest
     });
     return fragment;
   })
-  .then((fragmentTemplate) => pictureArea.appendChild(fragmentTemplate))
+  .then((fragmentTemplate) => {
+    pictures.appendChild(fragmentTemplate);
+    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+  })
   .catch(() => {
     const dataError = errorTemplate.cloneNode(true);
     fragment.appendChild(dataError);
-    pictureArea.appendChild(fragment);
-    setTimeout(()=>{
-      pictureArea.removeChild(document.querySelector('.data-error'));
+    pictures.appendChild(fragment);
+    setTimeout(() => {
+      pictures.removeChild(document.querySelector('.data-error'));
     }, 5000);
   });
-
-export {fragment};
+export { fragment };
